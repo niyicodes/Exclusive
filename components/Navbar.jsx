@@ -23,7 +23,7 @@ const Navbar = () => {
  };
 
  return (
-  <nav className="bg-white relative text-black font-inter border-b-2 border-b-zinc-500">
+  <nav className="bg-white relative text-black font-inter border-b-2 border-b-zinc-500 z-50">
    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-row justify-around items-center py-4 ">
     <div>
      <h3 className="font-bold text-2xl">Exclusive</h3>
@@ -72,17 +72,17 @@ const Navbar = () => {
       <AiOutlineSearch className="absolute right-[4px] font-medium cursor-pointer" />
      </div>
      <div className="relative">
-      <AiOutlineHeart className="text-2xl cursor-pointer" />
+      <AiOutlineHeart className="text-2xl cursor-pointer" onClick={()=> router.push('/wishlist')}/>
       <p className="absolute bottom-[13px] -right-3 z-30 bg-valencia-400 rounded-full text-center px-2 py-1 text-xs">0</p>
      </div>
      <div className="relative">
-      <MdOutlineShoppingCart className="text-2xl cursor-pointer" />
+      <MdOutlineShoppingCart className="text-2xl cursor-pointer" onClick={()=> router.push('/cart')}/>
       <p className="absolute bottom-[13px] -right-3 z-30 bg-valencia-400 rounded-full text-center px-2 py-1 text-xs">0</p>
      </div>
     </div>
     <div className="flex lg:hidden ml-auto justify-between gap-8">
     <div className="relative">
-      <MdOutlineShoppingCart className="text-[30px]" />
+      <MdOutlineShoppingCart className="text-[30px]" onClick={()=> router.push('/cart')}/>
       <p className="absolute bottom-[13px] -right-3 z-30 bg-valencia-400 rounded-full text-center px-2 py-1 text-xs">0</p>
      </div>
      <button type="button" className="" onClick={toggleMenu}>
@@ -104,7 +104,7 @@ const Navbar = () => {
     leaveTo="-translate-x-full"
    >
     <div
-     className={`fixed inset-0 flex items-center justify-center z-50 w-full h-screen bg-picton-blue-200 glass font-poppins`}
+     className={`fixed inset-0 flex items-center justify-center z-50 w-full h-screen bg-picton-blue-200 glass font-poppins z-50`}
     >
       <div className="w-full text-center mx-4">
      <ul className="flex flex-col gap-10 text-[35px] items-center overflow-y-scroll text-white font-bold">
