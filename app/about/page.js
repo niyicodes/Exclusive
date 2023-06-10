@@ -1,5 +1,7 @@
-import { DollarBag, Shop, Dollar, Bag } from '@/components/iconSVG'
+import { DollarBag, Shop, Dollar, Bag, Delivery, Service, Secure } from '@/components/iconSVG'
+import PersonCard from '@/components/PersonCard'
 import SatisfactoryCard from '@/components/SatisfactoryCard'
+import Team from '@/components/Team'
 import Image from 'next/image'
 import React from 'react'
 
@@ -9,6 +11,9 @@ const AboutPage = () => {
   const shopicon = <Shop />
   const dollaricon = <Dollar />
   const bagicon = <Bag />
+  const deliveryicon = <Delivery />
+  const serviceicon = <Service />
+  const secureicon = <Secure />
   return (
     <main className='font-poppins'>
 
@@ -34,6 +39,17 @@ const AboutPage = () => {
         <SatisfactoryCard text="Active Customers" icon={bagicon} value="45.5k"/>
         <SatisfactoryCard text="Gross Sale" icon={dollarbagicon} value="35k"/>
       </section>
+
+      <section className='my-[80px] xs:w-[90%] xl:w-[85%] mx-auto'>
+        <Team />
+      </section>
+
+      <section className='grid w-[80%] mx-auto xs:grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8 place-content-center my-14'>
+        <SatisfactoryCard text={"Free delivery for all orders over $140"} icon={deliveryicon} value="FREE AND FAST DELIVERY"/>
+        <SatisfactoryCard text="Friendly 24/7 customer support" icon={serviceicon} value="24/7 CUSTOMER SERVICE"/>
+        <SatisfactoryCard text="We return money within 30 days" icon={secureicon} value="MONEY BACK GUARANTEE"/>
+      </section>
+
     </main>
   )
 }
