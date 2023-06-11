@@ -43,7 +43,7 @@ const Cart = async () => {
    <section className="flex xs:flex-col xs:gap-10 md:flex-row justify-between font-inter items-start my-10">
      <div className="flex items-center gap-4">
        <input type="text" name="" id="" placeholder="Enter Coupon" className="border-2 outline-none px-2 py-3"/>
-       <button type="submit" className="bg-valencia-600 text-white hover:bg-valencia-400 hover:text-black rounded-md font-medium px-6 py-3 hover:scale-90 transition duration-300 ease-in">Apply Coupon</button>
+       <button type="submit" className="bg-valencia-600 text-white hover:bg-valencia-400 hover:text-black rounded-md xs:text-sm md:text-lg font-medium xs:px-3 md:px-6 py-3 hover:scale-90 transition duration-300 ease-in">Apply Coupon</button>
      </div>
      <div className="border-2 border-wild-sand-800 px-8 py-10 xs:w-auto md:w-[400px] rounded-md">
        <h3 className="font-bold text-xl mb-3">Cart Total</h3>
