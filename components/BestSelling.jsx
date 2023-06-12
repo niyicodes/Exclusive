@@ -1,7 +1,35 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Product from './Product'
+import { groq, createClient } from 'next-sanity'
+
+const clientConfig = {
+  projectId: "vzcw8bsk",
+  dataset: "production",
+  apiVersion: "2023-06-07",
+  useCdn: false,
+ };
+ 
+ const client = createClient(clientConfig);
 
 const BestSelling = () => {
+  const [bestSelling, setBestSelling] = useState([])
+
+  useEffect(()=>{
+    const getBestSelling = async () =>{
+      const bestSelling = await client.fetch(groq`*[price < 80][10...15]{
+        name,
+        _id,
+        "slug":slug.current,
+        "image": image.asset->url,
+        price,
+        discount,
+        rating,
+        countInStock,
+      }`);
+      setBestSelling(bestSelling) 
+    }
+    getBestSelling()
+   },[])
   return (
    <section className="my-12">
    <h3 className="text-valencia-500 text-2xl mb-8 font-bold font-poppins">
@@ -13,11 +41,20 @@ const BestSelling = () => {
      Best Selling Products
     </h3>
    </div>
-   <div className="flex mt-10 mb-[30px] pb-8 gap-8 justify-center items-center overflow-x-scroll">
-    <Product />
-    <Product />
-    <Product />
-    <Product />
+   <div className="flex mt-10 mb-[30px] pb-8 gap-8 items-center overflow-x-scroll">
+   {bestSelling.map((best) => {
+     return (
+      <Product
+       key={best._id}
+       image={best.image}
+       product_name={best.name}
+       product_inStock={best.countInStock}
+       price={best.price}
+       rating={best.rating}
+       discount={best.discount}
+      />
+     );
+    })}
    </div>
   </section>
   )

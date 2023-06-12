@@ -17,6 +17,12 @@ function getProducts() {
   "slug":slug.current,
   "image": image.asset->url,
   description,
+  price,
+  discount,
+  brand,
+  rating,
+  countInStock,
+  category,
   "alt":image.alt,
 }`);
 }
