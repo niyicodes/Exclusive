@@ -14,6 +14,11 @@ export default {
    type: "number",
   },
   {
+   name: "discount",
+   title: "Discount",
+   type: "number",
+  },
+  {
    name: "description",
    title: "Description",
    type: "text",

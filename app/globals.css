@@ -18,3 +18,12 @@
 .product:hover .btn{
   display: block;
 }
+
+.swiper-pagination-bullet{
+  border-color: #9a9a9a;
+  border-width: 3px;
+}
+
+.overflow-x-scroll::-webkit-scrollbar{
+  display: none;
+}
