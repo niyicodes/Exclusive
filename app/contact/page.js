@@ -2,10 +2,10 @@ import React from 'react'
 import {BiPhoneCall} from "react-icons/bi"
 import {MdOutlineEmail} from "react-icons/md"
 
-export const metadata = {
-  title: 'Contact Us | feel free to reach out to us',
-  description: 'We are always here to answer your questions about our services',
-}
+// export const metadata = {
+//   title: 'Contact Us | feel free to reach out to us',
+//   description: 'We are always here to answer your questions about our services',
+// }
 
 const Contact = () => {
   return (

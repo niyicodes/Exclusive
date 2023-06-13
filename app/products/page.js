@@ -4,10 +4,10 @@ import { groq, createClient } from "next-sanity";
 import Product from "@/components/Product";
 import { useRouter } from "next/navigation";
 
-export const metadata = {
- title: "Our Products | Browse for quality products",
- description: "Shop for quality products on Exclusive",
-};
+// const metadata = {
+//  title: "Our Products | Browse for quality products",
+//  description: "Shop for quality products on Exclusive",
+// };
 
 const clientConfig = {
  projectId: "vzcw8bsk",

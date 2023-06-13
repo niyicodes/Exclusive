@@ -10,10 +10,10 @@ import Team from "@/components/Team";
 import Image from "next/image";
 import React from "react";
 
-export const metadata = {
- title: 'About Exclusive | Know more about us and the team',
- description: 'We have nothing to hide from you our great customer',
-}
+// export const metadata = {
+//  title: 'About Exclusive | Know more about us and the team',
+//  description: 'We have nothing to hide from you our great customer',
+// }
 
 const AboutPage = () => {
  const dollarbagicon = <DollarBag />;
