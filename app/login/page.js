@@ -1,6 +1,11 @@
 import Image from 'next/image'
 import React from 'react'
 
+export const metadata = {
+  title: 'Login | continue shopping',
+  description: 'Login to access your cart and wishlist',
+}
+
 const Login = () => {
   return (
     <section className='flex items-center gap-8 w-full my-8 h-full font-inter'>

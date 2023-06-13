@@ -2,6 +2,10 @@ import Image from 'next/image'
 import React from 'react'
 import {FcGoogle} from "react-icons/fc"
 
+export const metadata = {
+  title: 'Sign up | Let us know who you are',
+  description: 'Join us at Exclusive to Shop for quality products without stress',
+}
 
 const SignUp = () => {
   return (
@@ -21,7 +25,7 @@ const SignUp = () => {
        <input type="password" name="" id="" className="border-b-2 border-wild-sand-700 outline-none py-2" placeholder='Password'/>
        
        <div className="flex flex-col justify-between gap-4">
-        <input type="submit" value="Log in" className='bg-valencia-500 px-8 py-4 text-white font-medium hover:bg-valencia-400 cursor-pointer rounded-md'/>
+        <input type="submit" value="Sign up" className='bg-valencia-500 px-8 py-4 text-white font-medium hover:bg-valencia-400 cursor-pointer rounded-md'/>
         <button type="submit" className='flex justify-center items-center gap-2 px-8 py-4 font-bold hover:bg-black hover:text-white border-2 rounded-md'>
           <FcGoogle /> Sign up with Google
         </button>

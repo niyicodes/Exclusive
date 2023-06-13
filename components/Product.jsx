@@ -31,7 +31,7 @@ const Product = ({
      Add To Cart
     </button>
    </figure>
-   <div className="details pl-3">
+   <div className="details pl-3 mt-auto">
     <p className="font-bold truncate w-[220px]">{product_name}</p>
     <div className="flex flex-col gap-2">
      <div className="price">

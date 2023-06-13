@@ -1,6 +1,7 @@
 import Product from './Product'
 import React, { useEffect, useState } from 'react'
 import { groq, createClient } from 'next-sanity'
+import { useRouter } from 'next/navigation';
 
 const clientConfig = {
   projectId: "vzcw8bsk",
@@ -14,10 +15,11 @@ const clientConfig = {
 
 const Explore = () => {
   const [explore, setExplore] = useState([])
+  const router = useRouter()
 
   useEffect(()=>{
     const getExplore = async () =>{
-      const explore = await client.fetch(groq`*[price < 150][10...18]{
+      const explore = await client.fetch(groq`*[price < 150][30...38]{
         name,
         _id,
         "slug":slug.current,
@@ -32,7 +34,7 @@ const Explore = () => {
     getExplore()
    },[])
   return (
-   <section className="my-12">
+   <section className="my-16">
    <h3 className="text-valencia-500 text-2xl mb-8 font-bold font-poppins">
     <span className="border-l-[15px] rounded-md mr-2 border-l-valencia-500 text-valencia-500"></span>{" "}
     Our Products
@@ -57,13 +59,14 @@ const Explore = () => {
      );
     })}
 
+   </div>
     <button
      type="submit"
-     className="text-center px-10 text-lg font-medium py-3 bg-valencia-500 text-white hover:bg-valencia-700 rounded-md my-8"
+     className="text-center px-10 text-lg font-medium py-3 bg-valencia-500 text-white hover:bg-valencia-700 rounded-md my-8 flex justify-center mx-auto"
+     onClick={()=> router.push('/products')}
     >
      View more products
     </button>
-   </div>
   </section>
   )
 }
