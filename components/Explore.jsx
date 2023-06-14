@@ -45,11 +45,13 @@ const Explore = () => {
      Explore Our Products
     </h3>
    </div>
+   {/* prodcuts area */}
    <div className="xs:flex xs:overflow-x-scroll xs:items-center sm:grid sm:grid-cols-2 xl:grid-cols-4 gap-6 place-items-center my-16">
    {explore.map((item) => {
      return (
       <Product
        key={item._id}
+       id={item._id}
        image={item.image}
        product_name={item.name}
        product_inStock={item.countInStock}

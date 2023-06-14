@@ -3,6 +3,7 @@ import { Inter, Poppins } from 'next/font/google'
 import Navbar from '@/components/Navbar'
 import Topnav from '@/components/Topnav';
 import Footer from '@/components/Footer';
+import { ReduxProvider } from './Redux/Provider';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -26,6 +27,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
       <body>
+        <ReduxProvider>
         <header>
           <Topnav />
           <Navbar />
@@ -36,6 +38,7 @@ export default function RootLayout({ children }) {
         <footer className="mt-auto">
         <Footer />
         </footer>
+        </ReduxProvider>
         </body>
     </html>
   )

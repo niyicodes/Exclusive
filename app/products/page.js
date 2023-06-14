@@ -197,6 +197,7 @@ const page = () => {
        return (
         <Product
          key={product._id}
+         id={product._id}
          image={product.image}
          product_name={product.name}
          product_inStock={product.countInStock}

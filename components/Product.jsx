@@ -1,8 +1,11 @@
-import React from "react";
 import ReactStars from "react-stars";
 import { AiOutlineHeart } from "react-icons/ai";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { addToCart } from "@/app/Redux/Features/cartSlice";
+import { addToWishlist } from "@/app/Redux/Features/wishlistSlice";
+import { useState } from "react";
 
 const Product = ({
  image,
@@ -13,11 +16,13 @@ const Product = ({
  rating,
  slug,
  alt,
+ id
 }) => {
  const navigate = useRouter();
+ const dispatch = useDispatch();
+ const [like, setLike] = useState(false);
  return (
-  <div
-   className="w-[300px] h-[300px] font-poppins product cursor-pointer shadow-md">
+  <div className="w-[300px] h-[300px] font-poppins product cursor-pointer shadow-md">
    <figure className="bg-wild-sand-100 relative py-3 mb-2 rounded-sm">
     <img src={image} alt={alt} className="m-auto w-[50%]" />
     {discount && (
@@ -26,17 +31,57 @@ const Product = ({
      </p>
     )}
     <div className="icons absolute top-2 right-2 flex flex-col gap-3">
-     <AiOutlineHeart className="bg-white rounded-full p-1 text-[25px]" />
-     <MdOutlineShoppingCart className="bg-white rounded-full p-1 text-[25px] " />
+     <AiOutlineHeart
+      className={`bg-white rounded-full p-1 text-[25px] ${
+       like ? "fill-red-500" : "fill-black"
+      }`}
+      onClick={() => {
+       dispatch(addToWishlist({ slug, product_name, image,id })), setLike(!like);
+      }}
+     />
+     <MdOutlineShoppingCart className="bg-white rounded-full p-1 text-[25px] " onClick={() =>
+      dispatch(
+       addToCart({
+        image,
+        price,
+        product_name,
+        product_inStock,
+        discount,
+        rating,
+        slug,
+        alt,
+        id
+       })
+      )
+     }/>
     </div>
+    {/* add to cart button */}
     <button
      type="button"
      className="btn absolute bottom-0 py-1 w-full text-center xs:hidden bg-black text-white"
+     onClick={() =>
+      dispatch(
+       addToCart({
+        image,
+        price,
+        product_name,
+        product_inStock,
+        discount,
+        rating,
+        slug,
+        alt,
+        id
+       })
+      )
+     }
     >
      Add To Cart
     </button>
    </figure>
-   <div className="details pl-3 mt-auto" onClick={() => navigate.push(`/products/${slug}`)}>
+   <div
+    className="details pl-3 mt-auto"
+    onClick={() => navigate.push(`/products/${slug}`)}
+   >
     <p className="font-bold truncate w-[220px]">{product_name}</p>
     <div className="flex flex-col gap-2">
      <div className="price">

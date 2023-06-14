@@ -6,6 +6,8 @@ import React, { useEffect, useState } from "react";
 import ReactStars from "react-stars";
 import { AiOutlineMinus, AiOutlinePlus, AiOutlineHeart } from "react-icons/ai";
 import Product from "@/components/Product";
+import { useDispatch } from "react-redux";
+// import { decrease, increase } from "@/app/Redux/Features/cartSlice";
 
 const clientConfig = {
  projectId: "vzcw8bsk",
@@ -19,9 +21,8 @@ const ProductDetails = () => {
  const [product, setProduct] = useState("");
  const [related, setRelated] = useState([]);
  const { slug } = useParams();
- const {category} = product
-
-
+ const { category, _id } = product;
+ const dispatch = useDispatch()
  // get product and related products
  useEffect(() => {
   // get product
@@ -59,7 +60,7 @@ const ProductDetails = () => {
   };
   getProduct();
   document.title = `${product.name}`;
- }, [slug,category]);
+ }, [slug, category]);
 
  const discountedPrice = `${
   product.price - (product.price * product.discount) / 100
@@ -67,7 +68,6 @@ const ProductDetails = () => {
 
  return (
   <main>
-
    <section className="flex xs:flex-col md:flex-row xl:w-[80%] xl:justify-center xl:mx-auto flex-row gap-8 w-full font-poppins mt-10 mb-16">
     {/* image area */}
     <figure className="md:w-[50%] shadow-md">
@@ -92,8 +92,12 @@ const ProductDetails = () => {
        edit={false}
        half={true}
       /> */}
-      <p className="text-regent-st-blue-700 italic font-medium">({product.countInStock}) product(s) left</p>
-      <p className="text-bold text-regent-st-blue-700">Brand: <span className="italic text-valencia-600">{product.brand}</span></p>
+      <p className="text-regent-st-blue-700 italic font-medium">
+       ({product.countInStock}) product(s) left
+      </p>
+      <p className="text-bold text-regent-st-blue-700">
+       Brand: <span className="italic text-valencia-600">{product.brand}</span>
+      </p>
      </article>
      <div className="flex items-center gap-10">
       <h3 className="text-2xl font-bold my-3">
@@ -136,28 +140,26 @@ const ProductDetails = () => {
    {/* related item */}
 
    <section className="my-12">
-   <h3 className="text-valencia-500 text-2xl mb-8 font-bold font-poppins">
-    <span className="border-l-[15px] rounded-md mr-2 border-l-valencia-500 text-valencia-500"></span>{" "}
-    Related Products
-   </h3>
+    <h3 className="text-valencia-500 text-2xl mb-8 font-bold font-poppins">
+     <span className="border-l-[15px] rounded-md mr-2 border-l-valencia-500 text-valencia-500"></span>{" "}
+     Related Products
+    </h3>
     <div className="flex items-center gap-6 overflow-x-scroll">
-     {
-      related.map((product)=>{
-       return(
-        <Product
-       key={product._id}
-       image={product.image}
-       product_name={product.name}
-       product_inStock={product.countInStock}
-       price={product.price}
-       rating={product.rating}
-       slug={product.slug}
-       alt={product.alt}
-       discount={product.discount}
-      />
-       )
-      })
-     }
+     {related.map((product) => {
+      return (
+       <Product
+        key={product._id}
+        image={product.image}
+        product_name={product.name}
+        product_inStock={product.countInStock}
+        price={product.price}
+        rating={product.rating}
+        slug={product.slug}
+        alt={product.alt}
+        discount={product.discount}
+       />
+      );
+     })}
     </div>
    </section>
   </main>

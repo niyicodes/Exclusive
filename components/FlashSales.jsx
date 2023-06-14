@@ -45,11 +45,13 @@ const FlashSales = () => {
     <h3 className="font-inter font-medium text-[30px]">Flash Sales</h3>
     <p>Count down `(coming)`</p>
    </div>
+   {/* products area */}
    <div className="flex mt-10 mb-[30px] pb-8 gap-8 items-center overflow-x-scroll">
    {flashSales.map((flashSale) => {
      return (
       <Product
        key={flashSale._id}
+       id={flashSale._id}
        image={flashSale.image}
        product_name={flashSale.name}
        product_inStock={flashSale.countInStock}

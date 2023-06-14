@@ -7,9 +7,12 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
  const [isMobileOpen, setIsMobileOpen] = useState(false);
+ const {quantity} = useSelector((state)=> state.cart)
+ const {wishes} = useSelector((state)=> state.wishlist)
 
  const pathname = usePathname();
  const router = useRouter();
@@ -91,22 +94,24 @@ const Navbar = () => {
       />
       <AiOutlineSearch className="absolute right-[4px] font-medium cursor-pointer" />
      </div>
+     {/* wishlist icon */}
      <div className="relative">
       <AiOutlineHeart
        className="text-2xl cursor-pointer"
        onClick={() => router.push("/wishlist")}
       />
       <p className="absolute bottom-[13px] -right-3 z-30 bg-valencia-400 rounded-full text-center px-2 py-1 text-xs">
-       0
+      {wishes}
       </p>
      </div>
+     {/* cart icon */}
      <div className="relative">
       <MdOutlineShoppingCart
        className="text-2xl cursor-pointer"
        onClick={() => router.push("/cart")}
       />
       <p className="absolute bottom-[13px] -right-3 z-30 bg-valencia-400 rounded-full text-center px-2 py-1 text-xs">
-       0
+      {quantity}
       </p>
      </div>
     </div>
@@ -117,7 +122,7 @@ const Navbar = () => {
        onClick={() => router.push("/cart")}
       />
       <p className="absolute bottom-[13px] -right-3 z-30 bg-valencia-400 rounded-full text-center px-2 py-1 text-xs">
-       0
+      {quantity}
       </p>
      </div>
      <button type="button" className="" onClick={toggleMenu}>

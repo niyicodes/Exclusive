@@ -47,6 +47,7 @@ const BestSelling = () => {
      return (
       <Product
        key={best._id}
+       id={best._id}
        image={best.image}
        product_name={best.name}
        product_inStock={best.countInStock}
