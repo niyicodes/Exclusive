@@ -70,7 +70,7 @@ const Footer = () => {
      <h3 className="text-xl text-white pb-6 font-bold">Download App</h3>
      <div>
       <small>Save $3 with App New User Only</small>
-      <Image src={"/app.png"} alt="get app" width="200" height="200" />
+      <Image src={"/app.png"} alt="get app" width="200" height="200" style={{width:"200px", height:"auto"}}/>
       <div className="socials flex gap-4 font-extrabold text-3xl mt-4">
        <span>
         <FiFacebook />

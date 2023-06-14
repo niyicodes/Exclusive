@@ -59,6 +59,7 @@ const page = () => {
     _id,
     "slug":slug.current,
     "image": image.asset->url,
+    "alt": image.alt,
     price,
     discount,
     rating,
@@ -201,6 +202,8 @@ const page = () => {
          product_inStock={product.countInStock}
          price={product.price}
          rating={product.rating}
+         slug={product.slug}
+         alt={product.alt}
          discount={product.discount}
         />
        );

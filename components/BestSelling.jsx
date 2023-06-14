@@ -21,6 +21,7 @@ const BestSelling = () => {
         _id,
         "slug":slug.current,
         "image": image.asset->url,
+        "alt": image.alt,
         price,
         discount,
         rating,
@@ -51,6 +52,8 @@ const BestSelling = () => {
        product_inStock={best.countInStock}
        price={best.price}
        rating={best.rating}
+       slug={best.slug}
+       alt={best.alt}
        discount={best.discount}
       />
      );

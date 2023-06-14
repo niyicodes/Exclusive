@@ -2,10 +2,7 @@ import Image from 'next/image'
 import React from 'react'
 import {FcGoogle} from "react-icons/fc"
 
-// export const metadata = {
-//   title: 'Sign up | Let us know who you are',
-//   description: 'Join us at Exclusive to Shop for quality products without stress',
-// }
+
 
 const SignUp = () => {
   return (

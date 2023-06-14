@@ -1,6 +1,8 @@
 import { groq, createClient } from 'next-sanity'
 import React, { useEffect, useState } from 'react'
 import Product from './Product'
+import { useRouter } from 'next/navigation';
+
 
 const clientConfig = {
   projectId: "vzcw8bsk",
@@ -13,6 +15,7 @@ const clientConfig = {
 
 const FlashSales = () => {
   const [flashSales, setFlashSales] = useState([])
+  const router = useRouter()
 
   useEffect(()=>{
     const getFlashSales = async () =>{
@@ -21,6 +24,7 @@ const FlashSales = () => {
         _id,
         "slug":slug.current,
         "image": image.asset->url,
+        "alt": image.alt,
         price,
         discount,
         rating,
@@ -51,11 +55,20 @@ const FlashSales = () => {
        product_inStock={flashSale.countInStock}
        price={flashSale.price}
        rating={flashSale.rating}
+       slug={flashSale.slug}
+       alt={flashSale.alt}
        discount={flashSale.discount}
       />
      );
     })}
    </div>
+   <button
+     type="submit"
+     className="text-center px-10 text-lg font-medium py-3 bg-valencia-500 text-white hover:bg-valencia-700 rounded-md my-8 flex justify-center mx-auto"
+     onClick={()=> router.push('/products')}
+    >
+     View more products
+    </button>
   </section>
   )
 }

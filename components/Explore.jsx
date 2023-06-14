@@ -24,6 +24,7 @@ const Explore = () => {
         _id,
         "slug":slug.current,
         "image": image.asset->url,
+        "alt": image.alt,
         price,
         discount,
         rating,
@@ -44,7 +45,7 @@ const Explore = () => {
      Explore Our Products
     </h3>
    </div>
-   <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-6 place-items-center my-16">
+   <div className="xs:flex xs:overflow-x-scroll xs:items-center sm:grid sm:grid-cols-2 xl:grid-cols-4 gap-6 place-items-center my-16">
    {explore.map((item) => {
      return (
       <Product
@@ -54,6 +55,8 @@ const Explore = () => {
        product_inStock={item.countInStock}
        price={item.price}
        rating={item.rating}
+       slug={item.slug}
+       alt={item.alt}
        discount={item.discount}
       />
      );

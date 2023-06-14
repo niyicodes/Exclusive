@@ -6,7 +6,7 @@ const CartItem = ({ id, thumbnail, price, title, quantity }) => {
    <article className="flex justify-between items-center h-[90px] border px-4 py-12 my-5 shadow-md font-poppins">
     {/* div1 */}
     <div className='flex xs:flex-col lg:flex-row items-center gap-4'>
-    <img src={"/camera.png"} alt="" className="w-[48px] h-[48px] object-contain" />
+    <img src={"/camera.png"} alt="title" className="w-[48px] h-[48px] object-contain" />
     <h3 className='text-xl font-bold xs:w-[80px] sm:w-[100px] md:w-[140px] lg:w-[180px] truncate'>Cameraaa i want to know what you look like</h3>
     </div>
     {/* div2 */}
