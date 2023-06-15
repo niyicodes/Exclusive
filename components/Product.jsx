@@ -64,7 +64,7 @@ const Product = ({
 
  return (
   <motion.div
-   className="w-[300px] h-[300px] font-poppins product cursor-pointer shadow-md"
+   className="w-[300px] h-auto font-poppins product cursor-pointer shadow-md"
    variants={variants}
   >
    <figure className="bg-wild-sand-100 relative py-3 mb-2 rounded-sm">
@@ -143,14 +143,14 @@ const Product = ({
    </figure>
    {/* product details */}
    <div
-    className="details pl-3 mt-auto"
+    className="details pl-3 mt-auto pt-2 pb-4"
     onClick={() => navigate.push(`/products/${slug}`)}
    >
     <p className="font-bold truncate w-[220px]">{product_name}</p>
     <div className="flex flex-col gap-2">
      <div className="price">
       {discount ? (
-       <div className="flex flex-col gap-4">
+       <div className="flex flex-col gap-2">
         <div className="flex gap-4 items-center">
          <h5 className="text-valencia-500 font-bold text-[20px]">
           ${price - (price * discount) / 100}
