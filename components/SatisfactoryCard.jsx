@@ -2,7 +2,7 @@ import React from "react";
 
 const SatisfactoryCard = ({ icon, value, text }) => {
  return (
-  <div className="satcard group w-[300px] border-2 py-8 px-2 flex flex-col gap-4 items-center justify-center cursor-pointer rounded-md shadow-md hover:bg-valencia-600 hover:text-white font-inter">
+  <div className="satcard group w-[300px] border-2 py-8 px-2 flex flex-col gap-4 items-center justify-center cursor-pointer rounded-md shadow-md hover:bg-valencia-600 hover:text-white font-inter transition-all duration-300 ease-in">
    <span className="bg-black   group-hover:border-wild-sand-100 rounded-full p-4 inline-block z-50 font-medium border-[15px] border-wild-sand-400">
     {icon}
    </span>

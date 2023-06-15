@@ -1,11 +1,16 @@
 import ReactStars from "react-stars";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import {RiDeleteBinLine} from "react-icons/ri"
 import { MdOutlineShoppingCart } from "react-icons/md";
-import { useRouter } from "next/navigation";
-import { useDispatch } from "react-redux";
-import { addToCart } from "@/app/Redux/Features/cartSlice";
-import { addToWishlist } from "@/app/Redux/Features/wishlistSlice";
+import { usePathname, useRouter } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
+import { addToCart } from "@/Redux/Features/cartSlice";
+import {
+ addToWishlist,
+ removeFromWishlist,
+} from "@/Redux/Features/wishlistSlice";
+import { motion } from "framer-motion";
 
 const Product = ({
  image,
@@ -16,13 +21,52 @@ const Product = ({
  rating,
  slug,
  alt,
- id
+ id,
+ variants,
 }) => {
  const navigate = useRouter();
+ const pathName = usePathname();
+ const {wishListItems} = useSelector((store)=> store.wishlist);
+ const isItemInWishlist = wishListItems.find((item) => item.id === id);
+ // setting path to show some icons
+ const isLikeButton = ["/", "/products"].includes(pathName);
+ const isCartButton = ["/", "/products", "/wishlist"].includes(pathName);
+ const isWishlist = ["/wishlist"].includes(pathName);
+
  const dispatch = useDispatch();
  const [like, setLike] = useState(false);
+
+ const handleWish = () => {
+  if (!like) {
+   dispatch(
+    addToWishlist({
+     image,
+     price,
+     product_name,
+     product_inStock,
+     discount,
+     rating,
+     slug,
+     alt,
+     id,
+    })
+   );
+  } else {
+   dispatch(removeFromWishlist(id));
+  }
+  setLike(!like);
+ };
+ const deleteWishItem = ()=>{
+  if(isItemInWishlist){
+   dispatch(removeFromWishlist(id))
+  }
+ }
+
  return (
-  <div className="w-[300px] h-[300px] font-poppins product cursor-pointer shadow-md">
+  <motion.div
+   className="w-[300px] h-[300px] font-poppins product cursor-pointer shadow-md"
+   variants={variants}
+  >
    <figure className="bg-wild-sand-100 relative py-3 mb-2 rounded-sm">
     <img src={image} alt={alt} className="m-auto w-[50%]" />
     {discount && (
@@ -30,30 +74,53 @@ const Product = ({
       -{discount}%
      </p>
     )}
+    {/* icons */}
     <div className="icons absolute top-2 right-2 flex flex-col gap-3">
-     <AiOutlineHeart
-      className={`bg-white rounded-full p-1 text-[25px] ${
-       like ? "fill-red-500" : "fill-black"
-      }`}
-      onClick={() => {
-       dispatch(addToWishlist({ slug, product_name, image,id })), setLike(!like);
-      }}
-     />
-     <MdOutlineShoppingCart className="bg-white rounded-full p-1 text-[25px] " onClick={() =>
-      dispatch(
-       addToCart({
-        image,
-        price,
-        product_name,
-        product_inStock,
-        discount,
-        rating,
-        slug,
-        alt,
-        id
-       })
-      )
-     }/>
+     {/* like button */}
+     {isLikeButton && (
+      <div
+       className="bg-white rounded-full p-1 text-[20px]"
+       onClick={handleWish}
+      >
+       {!like ? (
+        <AiOutlineHeart className="outline-black" />
+       ) : (
+        <AiFillHeart className="fill-valencia-700" />
+       )}
+      </div>
+     )}
+     {/* shop button */}
+     {isCartButton && (
+      <div>
+       <MdOutlineShoppingCart
+        className="bg-white rounded-full p-1 text-[25px] "
+        onClick={() =>
+         dispatch(
+          addToCart({
+           image,
+           price,
+           product_name,
+           product_inStock,
+           discount,
+           rating,
+           slug,
+           alt,
+           id,
+          })
+         )
+        }
+       />
+      </div>
+     )}
+     {/* delete button */}
+     {isWishlist && (
+      <div
+       className="bg-white rounded-full p-1 text-[20px]"
+       onClick={deleteWishItem}
+      >
+       <RiDeleteBinLine className="fill-black" />
+      </div>
+     )}
     </div>
     {/* add to cart button */}
     <button
@@ -65,12 +132,8 @@ const Product = ({
         image,
         price,
         product_name,
-        product_inStock,
         discount,
-        rating,
-        slug,
-        alt,
-        id
+        id,
        })
       )
      }
@@ -78,6 +141,7 @@ const Product = ({
      Add To Cart
     </button>
    </figure>
+   {/* product details */}
    <div
     className="details pl-3 mt-auto"
     onClick={() => navigate.push(`/products/${slug}`)}
@@ -128,7 +192,7 @@ const Product = ({
      </div>
     </div>
    </div>
-  </div>
+  </motion.div>
  );
 };
 

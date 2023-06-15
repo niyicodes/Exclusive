@@ -8,11 +8,12 @@ import { RxCross2 } from "react-icons/rx";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import { useSelector } from "react-redux";
+import { motion } from "framer-motion";
 
 const Navbar = () => {
  const [isMobileOpen, setIsMobileOpen] = useState(false);
- const {quantity} = useSelector((state)=> state.cart)
- const {wishes} = useSelector((state)=> state.wishlist)
+ const { quantity } = useSelector((state) => state.cart);
+ const { wishes } = useSelector((state) => state.wishlist);
 
  const pathname = usePathname();
  const router = useRouter();
@@ -25,17 +26,39 @@ const Navbar = () => {
   setIsMobileOpen(!isMobileOpen);
  };
 
+ const parent = {
+  visible: { y: 0, transition: { staggerChildren: 0.5 } },
+  hidden: { y: 50 },
+ };
+
+ const child = {
+  visible: { opacity: 1, y: 0 },
+  hidden: { opacity: 0, y: -40 },
+ };
+
  return (
   <nav className="bg-white relative text-black font-inter border-b-2 border-b-zinc-500 z-50">
    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-row justify-around items-center py-4 ">
     <div>
      <Link href="/">
-      <h3 className="font-bold text-2xl">Exclusive</h3>
+      <motion.h3
+       className="font-bold text-2xl"
+       initial={{ scale: 0 }}
+       animate={{ scale: 1 }}
+       transition={{ duration: 2 }}
+      >
+       Exclusive
+      </motion.h3>
      </Link>
     </div>
     <div className="hidden lg:block">
-     <ul className="flex flex-row items-center">
-      <li className="pr-6">
+     <motion.ul
+      className="flex flex-row items-center"
+      initial="hidden"
+      animate="visible"
+      variants={parent}
+     >
+      <motion.li className="pr-6" variants={child}>
        <Link
         href="/"
         className={`${
@@ -44,8 +67,8 @@ const Navbar = () => {
        >
         Home
        </Link>
-      </li>
-      <li className="px-6">
+      </motion.li>
+      <motion.li className="px-6" variants={child}>
        <Link
         href="/contact"
         className={`${
@@ -56,8 +79,8 @@ const Navbar = () => {
        >
         Contact
        </Link>
-      </li>
-      <li className="px-6">
+      </motion.li>
+      <motion.li className="px-6" variants={child}>
        <Link
         href="/about"
         className={`${
@@ -68,8 +91,8 @@ const Navbar = () => {
        >
         About
        </Link>
-      </li>
-      <li className="pl-6">
+      </motion.li>
+      <motion.li className="pl-6" variants={child}>
        <Link
         href="/signup"
         className={`${
@@ -80,11 +103,19 @@ const Navbar = () => {
        >
         Sign Up
        </Link>
-      </li>
-     </ul>
+      </motion.li>
+     </motion.ul>
     </div>
-    <div className="hidden lg:flex flex-row justify-between items-center gap-8">
-     <div className="relative flex flex-row items-center bg-zinc-200 rounded-md">
+    <motion.div
+     className="hidden lg:flex flex-row justify-between items-center gap-8"
+     initial="hidden"
+     animate="visible"
+     variants={parent}
+    >
+     <motion.div
+      variants={child}
+      className="relative flex flex-row items-center bg-zinc-200 rounded-md"
+     >
       <input
        type="text"
        name="search"
@@ -93,28 +124,30 @@ const Navbar = () => {
        className="bg-transparent text-black py-[3px] px-2 outline-none"
       />
       <AiOutlineSearch className="absolute right-[4px] font-medium cursor-pointer" />
-     </div>
+     </motion.div>
      {/* wishlist icon */}
-     <div className="relative">
-      <AiOutlineHeart
-       className="text-2xl cursor-pointer"
-       onClick={() => router.push("/wishlist")}
-      />
+     <motion.div
+      variants={child}
+      className="relative cursor-pointer"
+      onClick={() => router.push("/wishlist")}
+     >
+      <AiOutlineHeart className="text-2xl" />
       <p className="absolute bottom-[13px] -right-3 z-30 bg-valencia-400 rounded-full text-center px-2 py-1 text-xs">
-      {wishes}
+       {wishes}
       </p>
-     </div>
+     </motion.div>
      {/* cart icon */}
-     <div className="relative">
-      <MdOutlineShoppingCart
-       className="text-2xl cursor-pointer"
-       onClick={() => router.push("/cart")}
-      />
+     <motion.div
+      variants={child}
+      className="relative cursor-pointer"
+      onClick={() => router.push("/cart")}
+     >
+      <MdOutlineShoppingCart className="text-2xl" />
       <p className="absolute bottom-[13px] -right-3 z-30 bg-valencia-400 rounded-full text-center px-2 py-1 text-xs">
-      {quantity}
+       {quantity}
       </p>
-     </div>
-    </div>
+     </motion.div>
+    </motion.div>
     <div className="flex lg:hidden ml-auto justify-between gap-8">
      <div className="relative">
       <MdOutlineShoppingCart
@@ -122,7 +155,7 @@ const Navbar = () => {
        onClick={() => router.push("/cart")}
       />
       <p className="absolute bottom-[13px] -right-3 z-30 bg-valencia-400 rounded-full text-center px-2 py-1 text-xs">
-      {quantity}
+       {quantity}
       </p>
      </div>
      <button type="button" className="" onClick={toggleMenu}>
@@ -169,6 +202,11 @@ const Navbar = () => {
        <li className="">
         <Link href="/signup" onClick={toggleMenu}>
          Sign Up
+        </Link>
+       </li>
+       <li className="">
+        <Link href="/wishlist" onClick={toggleMenu}>
+         Wishlist
         </Link>
        </li>
       </ul>

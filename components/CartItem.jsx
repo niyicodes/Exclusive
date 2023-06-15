@@ -1,3 +1,4 @@
+import { decrementQuantity, incrementQuantity } from "@/Redux/Features/cartSlice";
 import React from "react";
 import { BiUpArrow, BiDownArrow } from "react-icons/bi";
 import { useDispatch } from "react-redux";
@@ -25,10 +26,10 @@ const CartItem = ({ id, thumbnail, price, title, quantity }) => {
    <div className="flex gap-4 items-center border-2 xs:px-2 sm:px-6 xs:py-1 sm:py-4 rounded-md">
     <p className="font-medium text-lg">{quantity}</p>
     <div className="controls flex flex-col gap-3 text-xl">
-     <button type="button" >
+     <button type="button" onClick={() => dispatch(incrementQuantity(id))}>
       <BiUpArrow />
      </button>
-     <button type="button" >
+     <button type="button" onClick={() => dispatch(decrementQuantity(id))}>
       <BiDownArrow />
      </button>
     </div>

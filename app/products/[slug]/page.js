@@ -7,7 +7,8 @@ import ReactStars from "react-stars";
 import { AiOutlineMinus, AiOutlinePlus, AiOutlineHeart } from "react-icons/ai";
 import Product from "@/components/Product";
 import { useDispatch } from "react-redux";
-// import { decrease, increase } from "@/app/Redux/Features/cartSlice";
+import { addToCart } from "@/Redux/Features/cartSlice";
+
 
 const clientConfig = {
  projectId: "vzcw8bsk",
@@ -127,6 +128,7 @@ const ProductDetails = () => {
       <button
        type="submit"
        className="bg-valencia-500 text-white w-[50%] py-2 text-bold rounded-md hover:bg-valencia-800 hover:scale-90 transition-all duration-300 ease-out"
+       onClick={() => dispatch(addToCart(product))}
       >
        Buy Now
       </button>

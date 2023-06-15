@@ -1,25 +1,25 @@
-import { groq, createClient } from 'next-sanity'
-import React, { useEffect, useState } from 'react'
-import Product from './Product'
-import { useRouter } from 'next/navigation';
-
+import { groq, createClient } from "next-sanity";
+import React, { useEffect, useState } from "react";
+import Product from "./Product";
+import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
 
 const clientConfig = {
-  projectId: "vzcw8bsk",
-  dataset: "production",
-  apiVersion: "2023-06-07",
-  useCdn: false,
- };
- 
- const client = createClient(clientConfig);
+ projectId: "vzcw8bsk",
+ dataset: "production",
+ apiVersion: "2023-06-07",
+ useCdn: false,
+};
+
+const client = createClient(clientConfig);
 
 const FlashSales = () => {
-  const [flashSales, setFlashSales] = useState([])
-  const router = useRouter()
+ const [flashSales, setFlashSales] = useState([]);
+ const router = useRouter();
 
-  useEffect(()=>{
-    const getFlashSales = async () =>{
-      const flashSales = await client.fetch(groq`*[discount != null]{
+ useEffect(() => {
+  const getFlashSales = async () => {
+   const flashSales = await client.fetch(groq`*[discount != null]{
         name,
         _id,
         "slug":slug.current,
@@ -30,13 +30,23 @@ const FlashSales = () => {
         rating,
         countInStock,
       }`);
-      setFlashSales(flashSales) 
-    }
-    getFlashSales()
-   },[])
+   setFlashSales(flashSales);
+  };
+  getFlashSales();
+ }, []);
 
-  return (
-   <section className="my-12">
+ const parent = {
+  visible: { x: 0, transition: { staggerChildren: 0.5, delayChildren:0.5 } },
+  hidden: { x: 50 },
+ };
+ const child = {
+  visible: { opacity: 1, y: 0 },
+  hidden: { opacity: 0, y: -20 },
+ };
+ 
+
+ return (
+  <section className="my-12">
    <h3 className="text-valencia-500 text-2xl mb-8 font-bold font-poppins">
     <span className="border-l-[15px] rounded-md mr-2 border-l-valencia-500 text-valencia-500"></span>{" "}
     Today's
@@ -46,8 +56,13 @@ const FlashSales = () => {
     <p>Count down `(coming)`</p>
    </div>
    {/* products area */}
-   <div className="flex mt-10 mb-[30px] pb-8 gap-8 items-center overflow-x-scroll">
-   {flashSales.map((flashSale) => {
+   <motion.div
+    className="flex mt-10 mb-[30px] pb-8 gap-8 items-center overflow-x-scroll"
+    initial="hidden"
+    animate="visible"
+    variants={parent}
+   >
+    {flashSales.map((flashSale) => {
      return (
       <Product
        key={flashSale._id}
@@ -60,19 +75,20 @@ const FlashSales = () => {
        slug={flashSale.slug}
        alt={flashSale.alt}
        discount={flashSale.discount}
+       variants={child}
       />
      );
     })}
-   </div>
+   </motion.div>
    <button
-     type="submit"
-     className="text-center px-10 text-lg font-medium py-3 bg-valencia-500 text-white hover:bg-valencia-700 rounded-md my-8 flex justify-center mx-auto"
-     onClick={()=> router.push('/products')}
-    >
-     View more products
-    </button>
+    type="submit"
+    className="text-center px-10 text-lg font-medium py-3 bg-valencia-500 text-white hover:bg-valencia-700 rounded-md my-8 flex justify-center mx-auto"
+    onClick={() => router.push("/products")}
+   >
+    View more products
+   </button>
   </section>
-  )
-}
+ );
+};
 
-export default FlashSales
+export default FlashSales;

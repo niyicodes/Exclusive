@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Category from "./Category";
 import { createClient, groq } from "next-sanity";
+import { motion } from "framer-motion";
 
 const clientConfig = {
  projectId: "vzcw8bsk",
@@ -37,7 +38,7 @@ const Categories = () => {
    <div className="flex gap-10 items-center">
     <h3 className="font-inter font-medium text-[30px]">Browse By Category</h3>
    </div>
-   <div className="flex mt-10 mb-[30px] pb-8 gap-8 xl:w-[90%] mx-auto items-center overflow-x-scroll">
+   <motion.div className="flex mt-10 mb-[30px] pb-8 gap-8 xl:w-[90%] mx-auto items-center overflow-x-scroll" initial={{opacity: 0, x:30}} whileInView={{opacity:1, x:0}} transition={{type: "keyframes", duration: 0.4}}>
     {categories.map((category) => {
      return (
       <Category
@@ -47,7 +48,7 @@ const Categories = () => {
       />
      );
     })}
-   </div>
+   </motion.div>
   </section>
  );
 };

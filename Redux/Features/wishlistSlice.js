@@ -10,12 +10,15 @@ const wishlistSlice = createSlice({
  initialState,
  reducers: {
   addToWishlist: (state, action) => {
-    state.wishListItems.push(action.payload);
-    state.wishes += 1 
+   state.wishListItems.push(action.payload);
+   state.wishes += 1;
   },
   removeFromWishlist: (state, action) => {
    const itemId = action.payload;
-   state.wishListItems = state.wishListItems.filter((item) => item.id !== itemId);
+   state.wishListItems = state.wishListItems.filter(
+    (item) => item.id !== itemId
+   );
+   state.wishes = state.wishListItems.length;
   },
  },
 });

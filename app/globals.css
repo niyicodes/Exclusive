@@ -16,7 +16,7 @@
 }
 
 .product:hover .btn{
-  display: block;
+  @apply xs:hidden lg:block
 }
 
 .swiper-pagination-bullet{
