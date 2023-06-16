@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { groq, createClient } from "next-sanity";
 import Product from "@/components/Product";
-import { useRouter } from "next/navigation";
+import SkeletonProduct from "@/components/SkeletonProduct";
 
 // const metadata = {
 //  title: "Our Products | Browse for quality products",
@@ -25,15 +25,17 @@ const page = () => {
  const [products, setProducts] = useState([]);
  const [discount, setDiscount] = useState([]);
  const [rating, setRating] = useState([]);
+ const [loading, setLoading] = useState(true);
+ const skeletonarray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
  const itemsPerPage = 20;
  const [currentPage, setCurrentPage] = useState(1);
-// load first 20 products
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const displayedProducts = products.slice(startIndex, endIndex);
- 
-// load next 20
+ // load first 20 products
+ const startIndex = (currentPage - 1) * itemsPerPage;
+ const endIndex = startIndex + itemsPerPage;
+ const displayedProducts = products.slice(startIndex, endIndex);
+
+ // load next 20
  const getNextProducts = () => {
   setCurrentPage((prevPage) => prevPage + 1);
  };
@@ -53,22 +55,25 @@ const page = () => {
 
  // Get products
  useEffect(() => {
-  const getProducts = async () => {
-   const products = await client.fetch(groq`*[_type == 'product']{
-    name,
-    _id,
-    "slug":slug.current,
-    "image": image.asset->url,
-    "alt": image.alt,
-    price,
-    discount,
-    rating,
-    countInStock,
-  }`);
-   const randomizedProducts = [...products].sort(() => Math.random() - 0.5);
-   setProducts(randomizedProducts);
-  };
-  getProducts();
+  setTimeout(async () => {
+   const getProducts = async () => {
+    const products = await client.fetch(groq`*[_type == 'product']{
+       name,
+       _id,
+       "slug":slug.current,
+       "image": image.asset->url,
+       "alt": image.alt,
+       price,
+       discount,
+       rating,
+       countInStock,
+     }`);
+    const randomizedProducts = [...products].sort(() => Math.random() - 0.5);
+    setProducts(randomizedProducts);
+   };
+   getProducts();
+   setLoading(false);
+  }, 6000);
  }, []);
 
  return (
@@ -85,7 +90,6 @@ const page = () => {
     </p>
    </div>
    <section className="flex xs:flex-col lg:flex-row xs:divide-y-2 lg:divide-x-2 gap-8 w-full">
-
     {/* filter section large screens*/}
     <section className="hidden lg:flex w-[20%]  flex-col gap-4 font-inter">
      <h3>Filter here</h3>
@@ -140,18 +144,21 @@ const page = () => {
 
     {/* filter section small screens */}
     <section className="lg:hidden flex justify-between gap-6 items-center overflow-x-scroll py-3 my-6">
-      {/* filter by category */}
-    <div className="flex items-center gap-4 mx-2">
+     {/* filter by category */}
+     <div className="flex items-center gap-4 mx-2">
       <h3 className="text-lg text-valencia-700 font-bold mb-3">Category</h3>
       <div className="">
        <select name="catgory" id="" className="border-2 px-3 py-2">
-       {categories.map((category, index) => {
-        return (
-         <option key={index} className="py-2 text-center text-base cursor-pointer">
-          {category.name}
-         </option>
-        );
-       })}
+        {categories.map((category, index) => {
+         return (
+          <option
+           key={index}
+           className="py-2 text-center text-base cursor-pointer"
+          >
+           {category.name}
+          </option>
+         );
+        })}
        </select>
       </div>
      </div>
@@ -160,13 +167,16 @@ const page = () => {
       <h3 className="text-lg text-valencia-700 font-bold mb-3">Brand</h3>
       <div className="">
        <select name="brand" id="" className="border-2 px-3 py-2">
-       {brands.map((brand, index) => {
-        return (
-         <option key={index} className="py-2 text-center text-base cursor-pointer">
-          {brand.brand}
-         </option>
-        );
-       })}
+        {brands.map((brand, index) => {
+         return (
+          <option
+           key={index}
+           className="py-2 text-center text-base cursor-pointer"
+          >
+           {brand.brand}
+          </option>
+         );
+        })}
        </select>
       </div>
      </div>
@@ -193,22 +203,33 @@ const page = () => {
     {/* Products section */}
     <section className="xs:w-full lg:w-[80%]">
      <div className="grid xs:grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8 place-items-center mb-8">
-      {displayedProducts.map((product) => {
-       return (
-        <Product
-         key={product._id}
-         id={product._id}
-         image={product.image}
-         product_name={product.name}
-         product_inStock={product.countInStock}
-         price={product.price}
-         rating={product.rating}
-         slug={product.slug}
-         alt={product.alt}
-         discount={product.discount}
-        />
-       );
-      })}
+      {loading ? (
+       <>
+        {skeletonarray.map((n) => (
+         <SkeletonProduct key={n} />
+        ))}
+       </>
+      ) : (
+       <>
+        {displayedProducts &&
+         displayedProducts.map((product) => {
+          return (
+           <Product
+            key={product._id}
+            id={product._id}
+            image={product.image}
+            product_name={product.name}
+            product_inStock={product.countInStock}
+            price={product.price}
+            rating={product.rating}
+            slug={product.slug}
+            alt={product.alt}
+            discount={product.discount}
+           />
+          );
+         })}
+       </>
+      )}
      </div>
      <button
       type="submit"
@@ -218,7 +239,6 @@ const page = () => {
       Load more Products
      </button>
     </section>
-
    </section>
   </main>
  );

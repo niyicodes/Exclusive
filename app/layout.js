@@ -5,6 +5,7 @@ import Topnav from "@/components/Topnav";
 import Footer from "@/components/Footer";
 import { ReduxProvider } from "@/Redux/Provider";
 import AnimationWrapper from "@/components/AnimationWrapper";
+import 'react-loading-skeleton/dist/skeleton.css'
 
 const inter = Inter({
  subsets: ["latin"],

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Product from "./Product";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
+import SkeletonProduct from "./SkeletonProduct";
 
 const clientConfig = {
  projectId: "vzcw8bsk",
@@ -15,35 +16,39 @@ const client = createClient(clientConfig);
 
 const FlashSales = () => {
  const [flashSales, setFlashSales] = useState([]);
+ const skeletonarray = [1, 2, 3, 4, 5];
+ const [loading, setLoading] = useState(true);
  const router = useRouter();
 
  useEffect(() => {
-  const getFlashSales = async () => {
-   const flashSales = await client.fetch(groq`*[discount != null]{
-        name,
-        _id,
-        "slug":slug.current,
-        "image": image.asset->url,
-        "alt": image.alt,
-        price,
-        discount,
-        rating,
-        countInStock,
-      }`);
-   setFlashSales(flashSales);
-  };
-  getFlashSales();
+  setTimeout(() => {
+   const getFlashSales = async () => {
+    const flashSales = await client.fetch(groq`*[discount != null]{
+           name,
+           _id,
+           "slug":slug.current,
+           "image": image.asset->url,
+           "alt": image.alt,
+           price,
+           discount,
+           rating,
+           countInStock,
+         }`);
+    setFlashSales(flashSales);
+   };
+   getFlashSales();
+   setLoading(false)
+  }, 6000);
  }, []);
 
  const parent = {
-  visible: { x: 0, transition: { staggerChildren: 0.5, delayChildren:0.5 } },
+  visible: { x: 0, transition: { staggerChildren: 0.5, delayChildren: 0.5 } },
   hidden: { x: 50 },
  };
  const child = {
   visible: { opacity: 1, y: 0 },
   hidden: { opacity: 0, y: -20 },
  };
- 
 
  return (
   <section className="my-12">
@@ -62,23 +67,33 @@ const FlashSales = () => {
     animate="visible"
     variants={parent}
    >
-    {flashSales.map((flashSale) => {
-     return (
-      <Product
-       key={flashSale._id}
-       id={flashSale._id}
-       image={flashSale.image}
-       product_name={flashSale.name}
-       product_inStock={flashSale.countInStock}
-       price={flashSale.price}
-       rating={flashSale.rating}
-       slug={flashSale.slug}
-       alt={flashSale.alt}
-       discount={flashSale.discount}
-       variants={child}
-      />
-     );
-    })}
+    {loading ? (
+     <>
+      {skeletonarray.map((n) => (
+       <SkeletonProduct key={n} />
+      ))}
+     </>
+    ) : (
+     <>
+      {flashSales.map((flashSale) => {
+       return (
+        <Product
+         key={flashSale._id}
+         id={flashSale._id}
+         image={flashSale.image}
+         product_name={flashSale.name}
+         product_inStock={flashSale.countInStock}
+         price={flashSale.price}
+         rating={flashSale.rating}
+         slug={flashSale.slug}
+         alt={flashSale.alt}
+         discount={flashSale.discount}
+         variants={child}
+        />
+       );
+      })}
+     </>
+    )}
    </motion.div>
    <button
     type="submit"
