@@ -1,11 +1,12 @@
 import ReactStars from "react-stars";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import {RiDeleteBinLine} from "react-icons/ri"
+import { BsFillCartCheckFill } from "react-icons/bs";
+import { RiDeleteBinLine } from "react-icons/ri";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { usePathname, useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { addToCart } from "@/Redux/Features/cartSlice";
+import { addToCart, removeItem } from "@/Redux/Features/cartSlice";
 import {
  addToWishlist,
  removeFromWishlist,
@@ -26,7 +27,7 @@ const Product = ({
 }) => {
  const navigate = useRouter();
  const pathName = usePathname();
- const {wishListItems} = useSelector((store)=> store.wishlist);
+ const { wishListItems } = useSelector((store) => store.wishlist);
  const isItemInWishlist = wishListItems.find((item) => item.id === id);
  // setting path to show some icons
  const isLikeButton = ["/", "/products"].includes(pathName);
@@ -35,6 +36,7 @@ const Product = ({
 
  const dispatch = useDispatch();
  const [like, setLike] = useState(false);
+ const [inCart, setInCart] = useState(false);
 
  const handleWish = () => {
   if (!like) {
@@ -56,11 +58,35 @@ const Product = ({
   }
   setLike(!like);
  };
- const deleteWishItem = ()=>{
-  if(isItemInWishlist){
-   dispatch(removeFromWishlist(id))
+
+ // remove from wishlist, not working yet
+ const deleteWishItem = () => {
+  if (isItemInWishlist) {
+   dispatch(removeFromWishlist(id));
   }
- }
+ };
+
+ // cart icon function
+ const handleAddToCartIcon = () => {
+  if (!inCart) {
+   dispatch(
+    addToCart({
+     image,
+     price,
+     product_name,
+     product_inStock,
+     discount,
+     rating,
+     slug,
+     alt,
+     id,
+    })
+   );
+  } else {
+   dispatch(removeItem(id));
+  }
+  setInCart(!inCart);
+ };
 
  return (
   <motion.div
@@ -91,25 +117,15 @@ const Product = ({
      )}
      {/* shop button */}
      {isCartButton && (
-      <div>
-       <MdOutlineShoppingCart
-        className="bg-white rounded-full p-1 text-[25px] "
-        onClick={() =>
-         dispatch(
-          addToCart({
-           image,
-           price,
-           product_name,
-           product_inStock,
-           discount,
-           rating,
-           slug,
-           alt,
-           id,
-          })
-         )
-        }
-       />
+      <div
+       className="bg-white rounded-full p-1 text-[25px] "
+       onClick={handleAddToCartIcon}
+      >
+       {!inCart ? (
+        <MdOutlineShoppingCart />
+       ) : (
+        <BsFillCartCheckFill className="fill-valencia-500" />
+       )}
       </div>
      )}
      {/* delete button */}

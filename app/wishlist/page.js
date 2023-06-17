@@ -16,7 +16,7 @@ const page = () => {
      <h3 className="text-xl font-medium">My wishlist</h3>
      <span>({wishes})</span>
     </div>
-     <section className="xs:flex overflow-x-scroll md:grid md:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 gap-5 my-10">
+     <section className="wishlist">
       {wishListItems.map((wish) => {
        return (
         <Product
