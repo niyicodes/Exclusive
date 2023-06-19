@@ -1,19 +1,15 @@
-import { decreaseQuantity, increaseQuantity } from "@/Redux/Features/cartSlice";
+"use client";
+import {
+ decreaseQuantity,
+ increaseQuantity,
+ removeItem,
+} from "@/Redux/Features/cartSlice";
 import React from "react";
 import { BiUpArrow, BiDownArrow } from "react-icons/bi";
 import { useDispatch } from "react-redux";
 
-
 const CartItem = ({ id, thumbnail, price, title, quantity }) => {
  const dispatch = useDispatch();
- const handleIncreaseQuantity = () => {
-  dispatch(increaseQuantity(id));
-};
-
-const handleDecreaseQuantity = () => {
-  dispatch(decreaseQuantity(id));
-};
-console.log({ id, thumbnail, price, title, quantity })
 
  return (
   <article className="flex justify-between items-center h-[90px] border px-4 py-12 my-5 shadow-md font-poppins">
@@ -36,10 +32,19 @@ console.log({ id, thumbnail, price, title, quantity })
    <div className="flex gap-4 items-center border-2 xs:px-2 sm:px-6 xs:py-1 sm:py-4 rounded-md">
     <p className="font-medium text-lg">{quantity}</p>
     <div className="controls flex flex-col gap-3 text-xl">
-     <button type="button" onClick={handleIncreaseQuantity}>
+     <button type="button" onClick={() => dispatch(increaseQuantity({ id }))}>
       <BiUpArrow />
      </button>
-     <button type="button" onClick={handleDecreaseQuantity}>
+     <button
+      type="button"
+      onClick={() => {
+       if (quantity === 1) {
+        dispatch(removeItem(id));
+        return;
+       }
+       dispatch(decreaseQuantity({ id }));
+      }}
+     >
       <BiDownArrow />
      </button>
     </div>

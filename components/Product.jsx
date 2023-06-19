@@ -59,12 +59,6 @@ const Product = ({
   setLike(!like);
  };
 
- // remove from wishlist, not working yet
- const deleteWishItem = () => {
-  if (isItemInWishlist) {
-   dispatch(removeFromWishlist(id));
-  }
- };
 
  // cart icon function
  const handleAddToCartIcon = () => {
@@ -132,7 +126,7 @@ const Product = ({
      {isWishlist && (
       <div
        className="bg-white rounded-full p-1 text-[20px]"
-       onClick={deleteWishItem}
+       onClick={()=> dispatch(removeFromWishlist(id))}
       >
        <RiDeleteBinLine className="fill-black" />
       </div>

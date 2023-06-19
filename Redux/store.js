@@ -4,9 +4,11 @@ import cartReducer from "./Features/cartSlice";
 import wishReducer from "./Features/wishlistSlice";
 
 
-export const store = configureStore({
+const store = configureStore({
  reducer:{
   cart: cartReducer,
   wishlist: wishReducer
  }
 })
+
+export default store

@@ -1,15 +1,21 @@
 "use client";
 import CartItem from "@/components/CartItem";
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Empty from "@/components/Empty";
 import Shipping from "@/components/Shipping";
 import AddCoupon from "@/components/AddCoupon";
+import { calculateTotals } from "@/Redux/Features/cartSlice";
 
-const Cart = async () => {
+const Cart = () => {
  const router = useRouter();
  const { cartItems, totalPrice, quantity } = useSelector((store) => store.cart);
+ 
+const dispatch = useDispatch()
+ useEffect(()=>{
+  dispatch(calculateTotals())
+ },[cartItems])
 
  return (
   <main>
@@ -66,7 +72,7 @@ const Cart = async () => {
       <AddCoupon />
       <div className="cartcheckout">
        <h3 className="font-bold text-xl mb-3">Cart Total</h3>
-       <Shipping subTotal={""} totalPrice={""} />
+       <Shipping subTotal={totalPrice} totalPrice={totalPrice} />
        <button type="submit" className="checkoutbutton" onClick={() => router.push("/checkout")}>
         Proceed to checkout
        </button>
