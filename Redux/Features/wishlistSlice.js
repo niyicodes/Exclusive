@@ -1,4 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
 const initialState = {
  wishListItems: [],
@@ -15,11 +17,30 @@ const wishlistSlice = createSlice({
   },
   removeFromWishlist: (state, action) => {
    const itemId = action.payload;
-   state.wishListItems = state.wishListItems.filter((item) => item.id !== itemId);
+   state.wishListItems = state.wishListItems.filter(
+    (item) => item.id !== itemId
+   );
+   state.wishes -= 1;
+   localStorage.setItem("wishlist", JSON.stringify(state));
+  },
+  clearWishlist: (state) => {
+   state.wishListItems = [];
+   state.wishes = 0;
   },
  },
 });
 
-export const { addToWishlist, removeFromWishlist } = wishlistSlice.actions;
+const persistConfig = {
+ key: "wishlist",
+ storage: storage,
+};
 
-export default wishlistSlice.reducer;
+const persistedWishListReducer = persistReducer(
+ persistConfig,
+ wishlistSlice.reducer
+);
+
+export const { addToWishlist, removeFromWishlist, clearWishlist } =
+ wishlistSlice.actions;
+
+export default persistedWishListReducer;

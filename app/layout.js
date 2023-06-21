@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import "./globals.css";
 import { Inter, Poppins } from "next/font/google";
 import Navbar from "@/components/Navbar";
@@ -6,7 +6,7 @@ import Topnav from "@/components/Topnav";
 import Footer from "@/components/Footer";
 import ReduxProvider from "@/Redux/Provider";
 import AnimationWrapper from "@/components/AnimationWrapper";
-import 'react-loading-skeleton/dist/skeleton.css'
+import "react-loading-skeleton/dist/skeleton.css";
 
 const inter = Inter({
  subsets: ["latin"],

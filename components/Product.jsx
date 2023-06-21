@@ -5,7 +5,7 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { usePathname, useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { addToCart, removeItem } from "@/Redux/Features/cartSlice";
 import {
  addToWishlist,
@@ -23,12 +23,22 @@ const Product = ({
  slug,
  alt,
  id,
- variants,
+ variants
 }) => {
  const navigate = useRouter();
  const pathName = usePathname();
  const { wishListItems } = useSelector((store) => store.wishlist);
- const isItemInWishlist = wishListItems.find((item) => item.id === id);
+ const { cartItems } = useSelector((store) => store.cart);
+
+ // Update the initial state of like and inCart based on the persisted state
+ useEffect(() => {
+  const isItemInCart = cartItems.find((item) => item.id === id);
+  const isItemInWishlist = wishListItems.find((item) => item.id === id);
+
+  setLike(isItemInWishlist ? true : false);
+  setInCart(isItemInCart ? true : false);
+}, [cartItems, wishListItems, id]);
+
  // setting path to show some icons
  const isLikeButton = ["/", "/products"].includes(pathName);
  const isCartButton = ["/", "/products", "/wishlist"].includes(pathName);
@@ -59,6 +69,14 @@ const Product = ({
   setLike(!like);
  };
 
+ const handleDeleteWish = () => {
+  if (like) {
+    dispatch(removeFromWishlist(id));
+    setLike(false);
+  }
+  console.log(id)
+  console.log(`deleted item with this ${id}`)
+};
 
  // cart icon function
  const handleAddToCartIcon = () => {
@@ -126,7 +144,7 @@ const Product = ({
      {isWishlist && (
       <div
        className="bg-white rounded-full p-1 text-[20px]"
-       onClick={()=> dispatch(removeFromWishlist(id))}
+       onClick={handleDeleteWish}
       >
        <RiDeleteBinLine className="fill-black" />
       </div>

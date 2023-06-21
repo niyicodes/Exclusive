@@ -1,4 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
 const initialState = {
  cartItems: [],
@@ -16,10 +18,10 @@ const cartSlice = createSlice({
    );
    if (itemInCart) {
     itemInCart.quantity++;
-   }else{
+   } else {
     state.cartItems.push({ ...action.payload, quantity: 1 });
    }
-   state.quantity = state.quantity + 1
+   state.quantity = state.quantity + 1;
   },
 
   increaseQuantity: (state, { payload }) => {
@@ -49,6 +51,13 @@ const cartSlice = createSlice({
  },
 });
 
+const persistConfig = {
+ key: "cart",
+ storage: storage,
+};
+
+const persistedCartReducer = persistReducer(persistConfig, cartSlice.reducer);
+
 export const {
  addToCart,
  increaseQuantity,
@@ -57,4 +66,4 @@ export const {
  removeItem,
 } = cartSlice.actions;
 
-export default cartSlice.reducer;
+export default persistedCartReducer;
