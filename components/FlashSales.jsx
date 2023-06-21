@@ -4,6 +4,7 @@ import Product from "./Product";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import SkeletonProduct from "./SkeletonProduct";
+import SalesCountdown from "./SalesCountdown";
 
 const clientConfig = {
  projectId: "vzcw8bsk",
@@ -37,10 +38,11 @@ const FlashSales = () => {
     setFlashSales(flashSales);
    };
    getFlashSales();
-   setLoading(false)
+   setLoading(false);
   }, 6000);
  }, []);
 
+ // Framer motion
  const parent = {
   visible: { x: 0, transition: { staggerChildren: 0.5, delayChildren: 0.5 } },
   hidden: { x: 50 },
@@ -52,17 +54,16 @@ const FlashSales = () => {
 
  return (
   <section className="my-12">
-   <h3 className="text-valencia-500 text-2xl mb-8 font-bold font-poppins">
-    <span className="border-l-[15px] rounded-md mr-2 border-l-valencia-500 text-valencia-500"></span>{" "}
-    Today's
+   <h3 className="title">
+    <span className="thickLeftBorder"></span> Today's
    </h3>
-   <div className="flex gap-10 items-center">
+   <div className="flashsalesTimerArea">
     <h3 className="font-inter font-medium text-[30px]">Flash Sales</h3>
-    <p>Count down `(coming)`</p>
+    <SalesCountdown />
    </div>
    {/* products area */}
    <motion.div
-    className="flex mt-10 mb-[30px] pb-8 gap-8 items-center overflow-x-scroll"
+    className="flashsales"
     initial="hidden"
     animate="visible"
     variants={parent}
@@ -97,7 +98,7 @@ const FlashSales = () => {
    </motion.div>
    <button
     type="submit"
-    className="text-center px-10 text-lg font-medium py-3 bg-valencia-500 text-white hover:bg-valencia-700 rounded-md my-8 flex justify-center mx-auto"
+    className="flashsalesBtn"
     onClick={() => router.push("/products")}
    >
     View more products

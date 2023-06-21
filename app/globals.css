@@ -15,52 +15,99 @@
  -webkit-backdrop-filter: blur(3px);
 }
 
-.product:hover .btn{
-  @apply xs:hidden lg:block
+.product:hover .btn {
+ @apply xs:hidden lg:block;
 }
 
-.swiper-pagination-bullet{
-  border-color: #9a9a9a;
-  border-width: 3px;
+.swiper-pagination-bullet {
+ border-color: #9a9a9a;
+ border-width: 3px;
 }
 
-.overflow-x-scroll::-webkit-scrollbar{
-  display: none;
+.overflow-x-scroll::-webkit-scrollbar {
+ display: none;
 }
 
-.proceedtocheckout{
-  @apply flex xs:flex-col xs:gap-10 md:flex-row justify-between font-inter items-start my-10
+.proceedtocheckout {
+ @apply flex xs:flex-col xs:gap-10 md:flex-row justify-between font-inter items-start my-10;
 }
-.cartcheckout{
-  @apply border-2 border-wild-sand-800 px-8 py-10 xs:w-auto md:w-[400px] rounded-md
+.cartcheckout {
+ @apply border-2 border-wild-sand-800 px-8 py-10 xs:w-auto md:w-[400px] rounded-md;
 }
-.checkoutbutton{
-  @apply bg-valencia-600 text-white hover:bg-valencia-400 hover:text-black rounded-md font-medium px-6 py-3 mt-5 hover:scale-90 transition duration-300 ease-in
+.checkoutbutton {
+ @apply bg-valencia-600 text-white hover:bg-valencia-400 hover:text-black rounded-md font-medium px-6 py-3 mt-5 hover:scale-90 transition duration-300 ease-in;
 }
-.returntoshop{
-  @apply px-5 py-3 border-2 hover:bg-black hover:text-white hover:scale-75 transition duration-300 ease-in text-black font-medium rounded-md
+.returntoshop {
+ @apply px-5 py-3 border-2 hover:bg-black hover:text-white hover:scale-75 transition duration-300 ease-in text-black font-medium rounded-md;
 }
-.carttablehead{
-  @apply flex justify-between items-center h-[90px] px-4 py-12 mt-8 mb-10 shadow-md font-poppins
+.carttablehead {
+ @apply flex justify-between items-center h-[90px] px-4 py-12 mt-8 mb-10 shadow-md font-poppins;
 }
-.cartheader{
-  @apply sm:text-xl xs:text-lg font-medium
+.cartheader {
+ @apply sm:text-xl xs:text-lg font-medium;
 }
-.couponbutton{
-  @apply bg-valencia-600 text-white hover:bg-valencia-400 hover:text-black rounded-md xs:text-sm md:text-lg font-medium xs:px-3 md:px-6 py-3 hover:scale-90 transition duration-300 ease-in
+.couponbutton {
+ @apply bg-valencia-600 text-white hover:bg-valencia-400 hover:text-black rounded-md xs:text-sm md:text-lg font-medium xs:px-3 md:px-6 py-3 hover:scale-90 transition duration-300 ease-in;
 }
-.shipping{
-  @apply grid grid-cols-1 gap-4 divide-y-2 divide-valencia-700 font-inter font-medium text-lg
+.shipping {
+ @apply grid grid-cols-1 gap-4 divide-y-2 divide-valencia-700 font-inter font-medium text-lg;
 }
-.shippingItem{
-  @apply flex items-center justify-between
+.shippingItem {
+ @apply flex items-center justify-between;
 }
-.paymentmethod{
-  @apply flex flex-col gap-4 font-poppins my-4
+.paymentmethod {
+ @apply flex flex-col gap-4 font-poppins my-4;
 }
-.payment{
-  @apply flex items-center text-lg gap-2
+.payment {
+ @apply flex items-center text-lg gap-2;
 }
-.wishlist{
-  @apply xs:flex overflow-x-scroll md:grid md:grid-cols-2  lg:grid-cols-3 xs:gap-5 my-10
+.wishlist {
+ @apply xs:flex overflow-x-scroll md:grid md:grid-cols-2  lg:grid-cols-3 xs:gap-5 my-10;
+}
+.time {
+ @apply flex flex-col gap-2 items-start;
+}
+.productIcon {
+ @apply bg-white rounded-full flex items-center justify-center mx-auto p-1 text-[25px];
+}
+.category{
+  @apply flex flex-col gap-4 w-[220px] h-[100px] items-center px-12 py-6 text-center border-[2px] border-wild-sand-300  cursor-pointer backdrop-blur-3xl bg-wild-sand-900 bg-blend-overlay
+}
+
+.categories {
+ @apply flex mt-10 mb-[30px] pb-8 gap-8 xl:w-[90%] mx-auto items-center overflow-x-scroll;
+}
+.thickLeftBorder {
+ @apply border-l-[15px] rounded-md mr-2 border-l-valencia-500 text-valencia-500;
+}
+.title {
+ @apply text-valencia-500 text-2xl mb-8 font-bold font-poppins;
+}
+.flashsalesTimerArea {
+ @apply flex xs:flex-col sm:flex-row xs:gap-[20px] sm:gap-[80px];
+}
+.flashsales {
+ @apply flex mt-10 mb-[30px] pb-8 gap-8 items-center overflow-x-scroll;
+}
+.flashsalesBtn {
+ @apply text-center px-10 text-lg font-medium py-3 bg-valencia-500 text-white hover:bg-valencia-700 rounded-md my-8 flex justify-center mx-auto;
+}
+.bestSelling{
+  @apply flex mt-10 mb-[30px] pb-8 gap-8 items-center overflow-x-scroll
+}
+
+.cartItem{
+  @apply flex justify-between items-center h-[90px] border px-4 py-12 my-5 shadow-md font-poppins
+}
+.cartItemImageText{@apply flex xs:flex-col lg:flex-row items-center gap-4}
+
+.cartItemTitle{
+  @apply text-xl font-bold xs:w-[80px] sm:w-[100px] md:w-[140px] lg:w-[180px] truncate
+}
+
+.cartItemQuantity{
+  @apply flex gap-4 items-center border-2 xs:px-2 sm:px-6 xs:py-1 sm:py-4 rounded-md
+}
+.cartItemControls{
+  @apply flex flex-col gap-3 text-xl
 }

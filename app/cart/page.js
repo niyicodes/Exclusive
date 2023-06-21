@@ -11,11 +11,11 @@ import { calculateTotals } from "@/Redux/Features/cartSlice";
 const Cart = () => {
  const router = useRouter();
  const { cartItems, totalPrice, quantity } = useSelector((store) => store.cart);
- 
-const dispatch = useDispatch()
- useEffect(()=>{
-  dispatch(calculateTotals())
- },[cartItems])
+
+ const dispatch = useDispatch();
+ useEffect(() => {
+  dispatch(calculateTotals());
+ }, [cartItems, quantity]);
 
  return (
   <main>
@@ -73,7 +73,11 @@ const dispatch = useDispatch()
       <div className="cartcheckout">
        <h3 className="font-bold text-xl mb-3">Cart Total</h3>
        <Shipping subTotal={totalPrice} totalPrice={totalPrice} />
-       <button type="submit" className="checkoutbutton" onClick={() => router.push("/checkout")}>
+       <button
+        type="submit"
+        className="checkoutbutton"
+        onClick={() => router.push("/checkout")}
+       >
         Proceed to checkout
        </button>
       </div>

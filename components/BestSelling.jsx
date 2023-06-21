@@ -1,22 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Product from "./Product";
-import { groq, createClient } from "next-sanity";
+import { groq } from "next-sanity";
 import SkeletonProduct from "./SkeletonProduct";
+import { client } from "@/client";
 
-const clientConfig = {
- projectId: "vzcw8bsk",
- dataset: "production",
- apiVersion: "2023-06-07",
- useCdn: false,
-};
-
-const client = createClient(clientConfig);
 
 const BestSelling = () => {
  const [bestSelling, setBestSelling] = useState([]);
  const skeletonarray = [1, 2, 3, 4, 5];
  const [loading, setLoading] = useState(true);
 
+//  FETCH BESTSELLING
  useEffect(() => {
   setTimeout(() => {
    const getBestSelling = async () => {
@@ -35,12 +29,14 @@ const BestSelling = () => {
    };
    getBestSelling();
    setLoading(false);
-  }, 6000);
+  }, 4000);
  }, []);
+
+
  return (
   <section className="my-12">
-   <h3 className="text-valencia-500 text-2xl mb-8 font-bold font-poppins">
-    <span className="border-l-[15px] rounded-md mr-2 border-l-valencia-500 text-valencia-500"></span>{" "}
+   <h3 className="title">
+    <span className="thickLeftBorder"></span>{" "}
     This Month
    </h3>
    <div className="flex gap-10 items-center">
@@ -48,7 +44,7 @@ const BestSelling = () => {
      Best Selling Products
     </h3>
    </div>
-   <div className="flex mt-10 mb-[30px] pb-8 gap-8 items-center overflow-x-scroll">
+   <div className="bestSelling">
     {loading ? (
      <>
       {skeletonarray.map((n) => (

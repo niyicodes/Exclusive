@@ -3,20 +3,8 @@ import React, { useEffect, useState } from "react";
 import { groq, createClient } from "next-sanity";
 import Product from "@/components/Product";
 import SkeletonProduct from "@/components/SkeletonProduct";
+import { client } from "@/client";
 
-// const metadata = {
-//  title: "Our Products | Browse for quality products",
-//  description: "Shop for quality products on Exclusive",
-// };
-
-const clientConfig = {
- projectId: "vzcw8bsk",
- dataset: "production",
- apiVersion: "2023-06-07",
- useCdn: false,
-};
-
-const client = createClient(clientConfig);
 
 const page = () => {
  const [categories, setCategories] = useState([]);

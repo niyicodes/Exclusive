@@ -8,15 +8,8 @@ import { AiOutlineMinus, AiOutlinePlus, AiOutlineHeart } from "react-icons/ai";
 import Product from "@/components/Product";
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/Redux/Features/cartSlice";
+import { client } from "@/client";
 
-
-const clientConfig = {
- projectId: "vzcw8bsk",
- dataset: "production",
- apiVersion: "2023-06-07",
- useCdn: false,
-};
-const client = createClient(clientConfig);
 
 const ProductDetails = () => {
  const [product, setProduct] = useState("");

@@ -23,7 +23,7 @@ const Product = ({
  slug,
  alt,
  id,
- variants
+ variants,
 }) => {
  const navigate = useRouter();
  const pathName = usePathname();
@@ -37,7 +37,7 @@ const Product = ({
 
   setLike(isItemInWishlist ? true : false);
   setInCart(isItemInCart ? true : false);
-}, [cartItems, wishListItems, id]);
+ }, [cartItems, wishListItems, id]);
 
  // setting path to show some icons
  const isLikeButton = ["/", "/products"].includes(pathName);
@@ -71,12 +71,12 @@ const Product = ({
 
  const handleDeleteWish = () => {
   if (like) {
-    dispatch(removeFromWishlist(id));
-    setLike(false);
+   dispatch(removeFromWishlist(id));
+   setLike(false);
   }
-  console.log(id)
-  console.log(`deleted item with this ${id}`)
-};
+  console.log(id);
+  console.log(`deleted item with this ${id}`);
+ };
 
  // cart icon function
  const handleAddToCartIcon = () => {
@@ -116,10 +116,7 @@ const Product = ({
     <div className="icons absolute top-2 right-2 flex flex-col gap-3">
      {/* like button */}
      {isLikeButton && (
-      <div
-       className="bg-white rounded-full p-1 text-[20px]"
-       onClick={handleWish}
-      >
+      <div className="productIcon" onClick={handleWish}>
        {!like ? (
         <AiOutlineHeart className="outline-black" />
        ) : (
@@ -129,10 +126,7 @@ const Product = ({
      )}
      {/* shop button */}
      {isCartButton && (
-      <div
-       className="bg-white rounded-full p-1 text-[25px] "
-       onClick={handleAddToCartIcon}
-      >
+      <div className="productIcon" onClick={handleAddToCartIcon}>
        {!inCart ? (
         <MdOutlineShoppingCart />
        ) : (
@@ -142,10 +136,7 @@ const Product = ({
      )}
      {/* delete button */}
      {isWishlist && (
-      <div
-       className="bg-white rounded-full p-1 text-[20px]"
-       onClick={handleDeleteWish}
-      >
+      <div className="productIcon" onClick={handleDeleteWish}>
        <RiDeleteBinLine className="fill-black" />
       </div>
      )}

@@ -3,15 +3,8 @@ import React, { useEffect, useState } from "react";
 import { groq, createClient } from "next-sanity";
 import { useRouter } from "next/navigation";
 import SkeletonProduct from "./SkeletonProduct";
+import { client } from "@/client";
 
-const clientConfig = {
- projectId: "vzcw8bsk",
- dataset: "production",
- apiVersion: "2023-06-07",
- useCdn: false,
-};
-
-const client = createClient(clientConfig);
 
 const Explore = () => {
  const [explore, setExplore] = useState([]);
@@ -19,6 +12,7 @@ const Explore = () => {
  const [loading, setLoading] = useState(true);
  const router = useRouter();
 
+//  fetch products
  useEffect(() => {
   setTimeout(() => {
    const getExplore = async () => {
@@ -39,10 +33,12 @@ const Explore = () => {
    setLoading(false);
   }, 6000);
  }, []);
+
+
  return (
   <section className="my-16">
-   <h3 className="text-valencia-500 text-2xl mb-8 font-bold font-poppins">
-    <span className="border-l-[15px] rounded-md mr-2 border-l-valencia-500 text-valencia-500"></span>{" "}
+   <h3 className="title">
+    <span className="thickLeftBorder"></span>{" "}
     Our Products
    </h3>
    <div className="flex gap-10 items-center">

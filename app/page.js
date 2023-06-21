@@ -6,10 +6,8 @@ import Explore from "@/components/Explore";
 import FlashSales from "@/components/FlashSales";
 import Perks from "@/components/Perks";
 import ShopList from "@/components/ShopList";
-import { useRouter } from "next/navigation";
 
 export default function Home() {
- const router = useRouter();
 
  return (
   <main className="">
