@@ -39,7 +39,7 @@ const FlashSales = () => {
    };
    getFlashSales();
    setLoading(false);
-  }, 6000);
+  }, 3000);
  }, []);
 
  // Framer motion

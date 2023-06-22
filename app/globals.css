@@ -111,3 +111,27 @@
 .cartItemControls{
   @apply flex flex-col gap-3 text-xl
 }
+
+.mobileFilter{
+  @apply lg:hidden flex justify-between gap-6 items-center overflow-x-scroll py-3 my-6
+}
+.mobileFilterDiv{
+  @apply flex flex-col items-start mx-1
+}
+.mobileFilterTitle{
+  @apply text-lg text-valencia-700 font-bold mb-3
+}
+
+.desktopFilter{
+  @apply hidden lg:flex w-[20%]  flex-col gap-4 font-inter
+}
+.desktopFilterTitle{
+  @apply text-2xl text-valencia-700 font-bold mb-3
+}
+.desktopFilterDiv{
+  @apply w-[200px] overflow-y-scroll h-[200px] px-6 py-8
+}
+
+.productsContainer{
+  @apply flex xs:flex-col lg:flex-row gap-8 w-full
+}
