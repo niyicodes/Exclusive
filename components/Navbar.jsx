@@ -3,17 +3,23 @@ import { useState } from "react";
 import { Transition } from "@headlessui/react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineHeart, AiOutlineSearch } from "react-icons/ai";
-import { MdOutlineShoppingCart } from "react-icons/md";
+import { MdOutlineShoppingCart, MdPersonOutline } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
+import Dropdown from "./Dropdown";
+
+
+
 
 const Navbar = () => {
  const [isMobileOpen, setIsMobileOpen] = useState(false);
+ const [isProfile, setIsProfile] = useState(false);
  const { quantity } = useSelector((state) => state.cart);
  const { wishes } = useSelector((state) => state.wishlist);
+ const { user } = useSelector((state) => state.auth);
 
  const pathname = usePathname();
  const router = useRouter();
@@ -106,12 +112,14 @@ const Navbar = () => {
       </motion.li>
      </motion.ul>
     </div>
+    {/* icons & search */}
     <motion.div
      className="hidden lg:flex flex-row justify-between items-center gap-8"
      initial="hidden"
      animate="visible"
      variants={parent}
     >
+      {/* serach box */}
      <motion.div
       variants={child}
       className="relative flex flex-row items-center bg-zinc-200 rounded-md"
@@ -119,12 +127,13 @@ const Navbar = () => {
       <input
        type="text"
        name="search"
-       id=""
+       id="search"
        placeholder="what are you looking for?"
        className="bg-transparent text-black py-[3px] px-2 outline-none"
       />
       <AiOutlineSearch className="absolute right-[4px] font-medium cursor-pointer" />
      </motion.div>
+
      {/* wishlist icon */}
      <motion.div
       variants={child}
@@ -136,6 +145,7 @@ const Navbar = () => {
        {wishes}
       </p>
      </motion.div>
+
      {/* cart icon */}
      <motion.div
       variants={child}
@@ -147,8 +157,20 @@ const Navbar = () => {
        {quantity}
       </p>
      </motion.div>
+
+     {/* account icon */}
+     <motion.div variants={child} className="cursor-pointer" onClick={()=> setIsProfile(!isProfile)}>
+      {!user ? (
+       <MdPersonOutline className="text-3xl"/>
+      ) : (
+       <img src={user.photoURL} alt={user.displayName} className="rounded-full w-[40px] h-[40px]"/>
+      )}
+     </motion.div>
+
     </motion.div>
+        {/* mobile icons */}
     <div className="flex lg:hidden ml-auto justify-between gap-8">
+
      <div className="relative">
       <MdOutlineShoppingCart
        className="text-[30px]"
@@ -158,6 +180,16 @@ const Navbar = () => {
        {quantity}
       </p>
      </div>
+
+     {/* account icon */}
+     <div className="cursor-pointer" onClick={()=> setIsProfile(!isProfile)}>
+      {!user ? (
+       <MdPersonOutline className="text-3xl"/>
+      ) : (
+       <img src={user.photoURL} alt={user.displayName} className="rounded-full w-[40px] h-[40px]"/>
+      )}
+     </div>
+
      <button type="button" className="" onClick={toggleMenu}>
       {isMobileOpen ? (
        <RxCross2 className="block h-[30px] w-[30px]" aria-hidden="true" />
@@ -168,7 +200,9 @@ const Navbar = () => {
        />
       )}
      </button>
+
     </div>
+
    </div>
    <Transition
     show={isMobileOpen}
@@ -213,6 +247,7 @@ const Navbar = () => {
      </div>
     </div>
    </Transition>
+   {isProfile && (<div className="absolute right-0"><Dropdown /></div>)}
   </nav>
  );
 };

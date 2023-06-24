@@ -10,6 +10,7 @@ import wishReducer from "./Features/wishlistSlice";
 const rootReducer = combineReducers({
  cart: cartReducer,
  wishlist: wishReducer,
+ auth: authReducer
  // Add other reducers here
 });
 

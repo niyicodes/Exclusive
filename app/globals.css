@@ -15,6 +15,13 @@
  -webkit-backdrop-filter: blur(3px);
 }
 
+.profileglass {
+ background: rgba(44, 58, 60, 0.6);
+ box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+ backdrop-filter: blur(5px);
+ -webkit-backdrop-filter: blur(5px);
+}
+
 .product:hover .btn {
  @apply xs:hidden lg:block;
 }
@@ -70,8 +77,8 @@
 .productIcon {
  @apply bg-white rounded-full flex items-center justify-center mx-auto p-1 text-[25px];
 }
-.category{
-  @apply flex flex-col gap-4 w-[220px] h-[100px] items-center px-12 py-6 text-center border-[2px] border-wild-sand-300  cursor-pointer backdrop-blur-3xl bg-wild-sand-900 bg-blend-overlay
+.category {
+ @apply flex flex-col gap-4 w-[220px] h-[100px] items-center px-12 py-6 text-center border-[2px] border-wild-sand-300  cursor-pointer backdrop-blur-3xl bg-wild-sand-900 bg-blend-overlay;
 }
 
 .categories {
@@ -92,46 +99,48 @@
 .flashsalesBtn {
  @apply text-center px-10 text-lg font-medium py-3 bg-valencia-500 text-white hover:bg-valencia-700 rounded-md my-8 flex justify-center mx-auto;
 }
-.bestSelling{
-  @apply flex mt-10 mb-[30px] pb-8 gap-8 items-center overflow-x-scroll
+.bestSelling {
+ @apply flex mt-10 mb-[30px] pb-8 gap-8 items-center overflow-x-scroll;
 }
 
-.cartItem{
-  @apply flex justify-between items-center h-[90px] border px-4 py-12 my-5 shadow-md font-poppins
+.cartItem {
+ @apply flex justify-between items-center h-[90px] border px-4 py-12 my-5 shadow-md font-poppins;
 }
-.cartItemImageText{@apply flex xs:flex-col lg:flex-row items-center gap-4}
-
-.cartItemTitle{
-  @apply text-xl font-bold xs:w-[80px] sm:w-[100px] md:w-[140px] lg:w-[180px] truncate
+.cartItemImageText {
+ @apply flex xs:flex-col lg:flex-row items-center gap-4;
 }
 
-.cartItemQuantity{
-  @apply flex gap-4 items-center border-2 xs:px-2 sm:px-6 xs:py-1 sm:py-4 rounded-md
-}
-.cartItemControls{
-  @apply flex flex-col gap-3 text-xl
+.cartItemTitle {
+ @apply text-xl font-bold xs:w-[80px] sm:w-[100px] md:w-[140px] lg:w-[180px] truncate;
 }
 
-.mobileFilter{
-  @apply lg:hidden flex justify-between gap-6 items-center overflow-x-scroll py-3 my-6
+.cartItemQuantity {
+ @apply flex gap-4 items-center border-2 xs:px-2 sm:px-6 xs:py-1 sm:py-4 rounded-md;
 }
-.mobileFilterDiv{
-  @apply flex flex-col items-start mx-1
-}
-.mobileFilterTitle{
-  @apply text-lg text-valencia-700 font-bold mb-3
+.cartItemControls {
+ @apply flex flex-col gap-3 text-xl;
 }
 
-.desktopFilter{
-  @apply hidden lg:flex w-[20%]  flex-col gap-4 font-inter
+.mobileFilter {
+ @apply lg:hidden flex justify-between gap-6 items-center overflow-x-scroll py-3 my-6;
 }
-.desktopFilterTitle{
-  @apply text-2xl text-valencia-700 font-bold mb-3
+.mobileFilterDiv {
+ @apply flex flex-col items-start mx-1;
 }
-.desktopFilterDiv{
-  @apply w-[200px] overflow-y-scroll h-[200px] px-6 py-8
+.mobileFilterTitle {
+ @apply text-lg text-valencia-700 font-bold mb-3;
 }
 
-.productsContainer{
-  @apply flex xs:flex-col lg:flex-row gap-8 w-full
+.desktopFilter {
+ @apply hidden lg:flex w-[20%]  flex-col gap-4 font-inter;
+}
+.desktopFilterTitle {
+ @apply text-2xl text-valencia-700 font-bold mb-3;
+}
+.desktopFilterDiv {
+ @apply w-[200px] overflow-y-scroll h-[200px] px-6 py-8;
+}
+
+.productsContainer {
+ @apply flex xs:flex-col lg:flex-row gap-8 w-full;
 }

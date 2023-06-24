@@ -7,10 +7,12 @@ import Empty from "@/components/Empty";
 import Shipping from "@/components/Shipping";
 import AddCoupon from "@/components/AddCoupon";
 import { calculateTotals } from "@/Redux/Features/cartSlice";
+import Link from "next/link";
 
 const Cart = () => {
  const router = useRouter();
  const { cartItems, totalPrice, quantity } = useSelector((store) => store.cart);
+ const { user } = useSelector((store) => store.auth);
 
  const dispatch = useDispatch();
  useEffect(() => {
@@ -73,13 +75,27 @@ const Cart = () => {
       <div className="cartcheckout">
        <h3 className="font-bold text-xl mb-3">Cart Total</h3>
        <Shipping subTotal={totalPrice} totalPrice={totalPrice} />
-       <button
-        type="submit"
-        className="checkoutbutton"
-        onClick={() => router.push("/checkout")}
-       >
-        Proceed to checkout
-       </button>
+       <div>
+        {!user ? (
+         <div>
+          <p className="my-8 font-medium">
+           You can't proceed to checkout without you Signed in or Logged in
+          </p>
+          <div className="flex gap-10 text-lg text-valencia-800">
+          <Link href="/login" className="border-2 py-2 px-6 rounded-md">Login</Link>
+          <Link href="/signup" className="border-2 py-2 px-6 rounded-md">SignUp</Link>
+          </div>
+         </div>
+        ) : (
+         <button
+          type="submit"
+          className="checkoutbutton"
+          onClick={() => router.push("/checkout")}
+         >
+          Proceed to checkout
+         </button>
+        )}
+       </div>
       </div>
      </section>
     </>

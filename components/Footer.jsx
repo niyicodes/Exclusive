@@ -15,7 +15,7 @@ const Footer = () => {
      <p className="font-medium pb-2">Subscribe</p>
      <small className="font-bold">Get 10% off your first order</small>
      <div className="relative mt-2">
-      <input type="email" name="" id="" placeholder="Enter your email" className="rounded-md py-2 pl-2"/>
+      <input type="email" name="" id="footeremail" placeholder="Enter your email" className="rounded-md py-2 pl-2"/>
       <AiOutlineSend className="absolute top-2 right-0 text-xl"/>
      </div>
     </div>
