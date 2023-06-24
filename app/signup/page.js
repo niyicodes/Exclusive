@@ -102,13 +102,14 @@ const SignUp = () => {
       onChange={(e) => setPassword(e.target.value)}
      />
 
-     <div className="flex flex-col justify-between gap-4">
       <input
        type="submit"
        value="Sign up"
        className="bg-valencia-500 px-8 py-4 text-white font-medium hover:bg-valencia-400 cursor-pointer rounded-md"
        onClick={signUpWithEmailAndPassword}
       />
+    </form>
+     <div className="flex flex-col justify-between gap-4 mt-8">
       <button
        type="submit"
        className="flex justify-center items-center gap-2 px-8 py-4 font-bold hover:bg-black hover:text-white border-2 rounded-md"
@@ -123,7 +124,6 @@ const SignUp = () => {
        </a>
       </p>
      </div>
-    </form>
    </div>
   </section>
  );
