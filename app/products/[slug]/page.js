@@ -147,7 +147,7 @@ const ProductDetails = () => {
         image={product.image}
         product_name={product.name}
         product_inStock={product.countInStock}
-        price={product.price}
+        price={product.price || (product.price - (product.price * product.discount) / 100)}
         rating={product.rating}
         slug={product.slug}
         alt={product.alt}

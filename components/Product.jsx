@@ -54,6 +54,7 @@ const Product = ({
     addToWishlist({
      image,
      price,
+     newPrice,
      product_name,
      product_inStock,
      discount,
@@ -85,6 +86,7 @@ const Product = ({
     addToCart({
      image,
      price,
+     newPrice,
      product_name,
      product_inStock,
      discount,
@@ -99,6 +101,10 @@ const Product = ({
   }
   setInCart(!inCart);
  };
+ 
+
+ const newPrice = Number((price - (price * discount) / 100).toFixed(0))
+ 
 
  return (
   <motion.div
@@ -150,6 +156,7 @@ const Product = ({
        addToCart({
         image,
         price,
+        newPrice,
         product_name,
         discount,
         id,
@@ -172,7 +179,7 @@ const Product = ({
        <div className="flex flex-col gap-2">
         <div className="flex gap-4 items-center">
          <h5 className="text-valencia-500 font-bold text-[20px]">
-          ${price - (price * discount) / 100}
+          {discount ? (`${newPrice}`) : {price}}
          </h5>
          <h5 className="text-wild-sand-600 font-medium line-through text-[20px]">
           ${price}

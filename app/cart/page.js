@@ -52,9 +52,9 @@ const Cart = () => {
          <CartItem
           id={cartItem.id}
           key={cartItem.id}
-          title={cartItem.product_name}
+          title={cartItem.product_name || cartItem.name}
           quantity={cartItem.quantity}
-          price={cartItem.price}
+          price={cartItem.newPrice || cartItem.price}
           thumbnail={cartItem.image}
          />
         );
